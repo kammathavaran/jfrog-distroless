@@ -10,7 +10,7 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: artifact_test
-      buildName: docker_distro_build
+      buildName: docker_distro_build_1
       buildNumber: 1
 pipelines:
   - name: distroless_docker_build_push
