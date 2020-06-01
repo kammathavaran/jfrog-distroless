@@ -55,3 +55,4 @@ In some cases, you'll want to customise the Artifactory Docker image and add mor
 See [customize-example](customize-example) directory with a couple of Dockerfiles as examples of how this can be done.
 
 **NOTE:** These are examples only and are meant to be extended as needed!
+another change
