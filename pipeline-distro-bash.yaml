@@ -34,30 +34,40 @@ pipelines:
           onSuccess:
             - echo "Triggered the build"    
       - name: docker_build_redhat_ubi_rt7
-        type: DockerBuild
+        type: bash
         configuration:
           affinityGroup: image1
-          dockerFileLocation: customize-example
-          dockerFileName: Dockerfile.redhat-ubi-rt7
-          dockerImageName: 'chartstesting-distroless-local.jfrog.io/artifactory-rh-ubi'
-          dockerOptions: --build-arg ARTIFACTORY_BASE_VERSION=7.4.1
-          dockerImageTag: ${run_number}
-          inputResources:
-            - name: distrolessGithubRepo
-          integrations:
-            - name: artifact_test    
-      - name: docker_build_python
-        type: DockerBuild
-        configuration:
-          affinityGroup: image2
-          dockerFileLocation: customize-example
-          dockerFileName: Dockerfile.python
-          dockerImageName: 'chartstesting-distroless-local.jfrog.io/python'
-          dockerImageTag: ${run_number}
+#          dockerFileLocation: customize-example
+#          dockerFileName: Dockerfile.redhat-ubi-rt7
+#          dockerImageName: 'chartstesting-distroless-local.jfrog.io/artifactory-rh-ubi'
+#          dockerOptions: --build-arg ARTIFACTORY_BASE_VERSION=7.4.1
+#          dockerImageTag: ${run_number}
           inputResources:
             - name: distrolessGithubRepo
           integrations:
             - name: artifact_test
+        execution:
+          onExecute:
+            - echo "Starting the build"
+            - docker build -t chartstesting-distroless-local.jfrog.io/artifactory-rh-ubi:${run_number} --build-arg ARTIFACTORY_BASE_VERSION=7.4.1 customize-example/Dockerfile.redhat-ubi-rt7
+#            - export JFROG_CLI_OFFER_CONFIG=false; ./jfrog rt docker-push chartstesting-distroless-local.jfrog.io/artifactory-rh-ubi:${run_number} distroless-local --build-name="DistrolessPipe" --build-number=${run_number} --server-id=chartstesting --url=${int_artifact_test_url} --user=${int_artifact_test_user} --password=${int_artifact_test_apikey}
+         
+      - name: docker_build_python
+        type: DockerBuild
+        configuration:
+          affinityGroup: image2
+ #         dockerFileLocation: customize-example
+ #         dockerFileName: Dockerfile.python
+ #         dockerImageName: 'chartstesting-distroless-local.jfrog.io/python'
+ #         dockerImageTag: ${run_number}
+          inputResources:
+            - name: distrolessGithubRepo
+          integrations:
+            - name: artifact_test
+        execution:
+          onExecute:
+            - echo "Starting the build"
+            - docker build -t chartstesting-distroless-local.jfrog.io/artifactory-rh-ubi:${run_number} customize-example/Dockerfile.python           
       - name: docker_build_curl
         type: DockerBuild
         configuration:
