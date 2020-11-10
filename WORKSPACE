@@ -36,28 +36,28 @@ package_manager_repositories()
 
 ## Snapshot repo has folder that Package.gz don't change
 dpkg_src(
-    name = "debian_stretch",
+    name = "debian_buster",
     arch = "amd64",
-    distro = "stretch",
-    sha256 = "79a66cd92ba9096fce679e15d0b5feb9effcf618b0a6d065eb32684dbffd0311",
-    snapshot = "20190224T095432Z",
+    distro = "buster",
+    sha256 = "ca19e4187523f4b087a2e7aaa2662c6a0b46dc81ff2f3dd44d9c5d95df0df212",
+    snapshot = "20191028T085816Z",
     url = "https://deepscan.jfrog.io/deepscan/debian/archive",
 )
 
 dpkg_src(
-    name = "debian_stretch_backports",
+    name = "debian_buster_backports",
     arch = "amd64",
-    distro = "stretch-backports",
-    sha256 = "521da2a9eb91afccfb008272a05c7e8e2fde1d1d54f46a1d356b7be88920fffe",
-    snapshot = "20190217T090420Z",
+    distro = "buster-backports",
+    sha256 = "103d0d0e190f0cbe2a9c2be69b3e4f204481feae03a96f9a27cf7dd0798cdb75",
+    snapshot = "20191028T085816Z",
     url = "https://deepscan.jfrog.io/deepscan/debian/archive",
 )
 
 dpkg_src(
-    name = "debian_stretch_security",
-    package_prefix = "https://deepscan.jfrog.io/deepscan/debian/archive/debian-security/20190131T235445Z/",
-    packages_gz_url = "https://deepscan.jfrog.io/deepscan/debian/archive/debian-security/20190131T235445Z/dists/stretch/updates/main/binary-amd64/Packages.gz",
-    sha256 = "4108944dd44b1b0d57c4765115244d363c1d69285c1d574ad61bb51f6d81828f",
+    name = "debian_buster_security",
+    package_prefix = "https://deepscan.jfrog.io/deepscan/debian/archive/debian-security/20191028T085816Z/",
+    packages_gz_url = "https://deepscan.jfrog.io/deepscan/debian/archive/debian-security/20191028T085816Z/dists/buster/updates/main/binary-amd64/Packages.gz",
+    sha256 = "dace61a2f1c4031f33dbc78e416a7211fad9946a3d997e96256561ed92b034be",
 )
 
 dpkg_src(
@@ -68,10 +68,10 @@ dpkg_src(
 )
 
 dpkg_src(
-    name = "debian_stretch_openssl",
+    name = "debian_buster_openssl",
     package_prefix = "https://deepscan.jfrog.io/artifactory/snapshot.debian.org-gcp/archive/debian-security/20191028T085816Z/",
-    packages_gz_url = "https://deepscan.jfrog.io/artifactory/snapshot.debian.org-gcp/archive/debian-security/20191028T085816Z/dists/stretch/updates/main/binary-amd64/Packages.gz",
-    sha256 = "acea7d952d8ab84de3cd2c26934a1bcf5ad244d344ecdb7b2d0173712bbd9d7b",
+    packages_gz_url = "https://deepscan.jfrog.io/artifactory/snapshot.debian.org-gcp/archive/debian-security/20191028T085816Z/dists/buster/updates/main/binary-amd64/Packages.gz",
+    sha256 = "dace61a2f1c4031f33dbc78e416a7211fad9946a3d997e96256561ed92b034be",
 )
 
 dpkg_list(
@@ -82,7 +82,6 @@ dpkg_list(
         "libc6",
         "base-files",
         "ca-certificates",
-#        "openssl=1.1.1a-1",
         "openssl=1.1.0l-1~deb9u1",
         "libssl1.1=1.1.0l-1~deb9u1",
         "libtinfo5",
@@ -149,12 +148,6 @@ http_file(
     urls = ["https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64"],
 )
 
-#http_file(
-#    name = "busybox",
-#    executable = True,
-#    sha256 = "5776b1f4fbff641eb09024483fde28467e81bc74118c0c65ce5a8ad7a1029063",
-#    urls = ["https://busybox.net/downloads/binaries/1.30.0-i686/busybox"],
-#)
 #use this fixed version for this issue https://github.com/GoogleContainerTools/distroless/issues/225
 http_file(
     name = "busybox",
